@@ -26,7 +26,7 @@ namespace BaseTemplate.Server5.Actor
             {
                 Error = delegate (object sender, ErrorEventArgs args)
                 {
-                    this.logger.Error(args.ErrorContext.Error.Message);
+                    this.logger.Log(Akka.Event.LogLevel.InfoLevel, new Exception(), args.ErrorContext.Error.Message);
                     args.ErrorContext.Handled = true;
                 }
             };            
@@ -39,7 +39,7 @@ namespace BaseTemplate.Server5.Actor
             Receive<string>(msg =>
             {
                 Console.WriteLine($"{Sender}:{msg}");
-                this.logger.Info($"{Sender}:{msg}");
+                this.logger.Log(Akka.Event.LogLevel.InfoLevel,new Exception(), $"{Sender}:{msg}");
             });
         }
 
